@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Audio Cleaner</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .box {
+            border: 2px dashed #ccc;
+            padding: 30px;
+            width: 300px;
+            margin: auto;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎧 Audio Cleaner</h1>
+
+    <div class="box">
+        <input type="file" id="fileInput" />
+        <br><br>
+
+        <label for="preset">Preset:</label>
+        <select id="preset">
+            <option value="default">Default</option>
+            <option value="podcast">Podcast</option>
+            <option value="voz">Voz</option>
+            <option value="reunion">Reunión</option>
+        </select>
+        <br><br>
+        <button onclick="upload()">Limpiar audio</button>
+    </div>
+
+    <p id="status"></p>
+
+    <script>
+        async function upload() {
+            const fileInput = document.getElementById("fileInput");
+            const presetSelect = document.getElementById("preset");
+            const status = document.getElementById("status");
+
+            if (!fileInput.files.length) {
+                alert("Selecciona un archivo");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const preset = presetSelect.value;
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("preset", preset);
+
+            status.innerText = "Procesando... ⏳";
+
+            try {
+                const response = await fetch("/clean-audio/", { method: "POST", body: formData });
+
+                if (!response.ok) {
+                    throw new Error("Error en el servidor");
+                }
+
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "cleaned.mp3";
+                a.click();
+
+                status.innerText = "✅ Audio listo!";
+            } catch (error) {
+                status.innerText = "❌ Error procesando audio";
+            }
+        }
+    </script>
+
+</body>
+</html>
