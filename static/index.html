@@ -62,7 +62,9 @@
             status.innerText = "Procesando... ⏳";
 
             try {
-                const response = await fetch("/clean-audio/", { method: "POST", body: formData });
+                const response = await fetch("https://audio-cleaner-backend.onrender.com/clean-audio/", 
+                { method: "POST", 
+                body: formData });
 
                 if (!response.ok) {
                     throw new Error("Error en el servidor");
