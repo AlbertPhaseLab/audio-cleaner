@@ -11,23 +11,29 @@
 
 <div class="container">
 
-    <!-- Header -->
-    <div class="header">
+    <div class="card">
+
+        <!-- Header -->
         <h1 id="title"></h1>
         <p id="subtitle"></p>
 
         <!-- Language -->
-        <select id="lang" onchange="changeLang()">
-            <option value="es">ES</option>
-            <option value="en">EN</option>
-        </select>
-    </div>
+        <div class="lang-switcher">
+            <select id="lang" onchange="changeLang()">
+                <option value="es">🇪🇸 ES</option>
+                <option value="en">🇬🇧 EN</option>
+            </select>
+        </div>
 
-    <!-- Card -->
-    <div class="card">
+        <!-- Drag & Drop -->
+        <div id="drop-area">
+            <p id="dropText"></p>
+            <input type="file" id="fileInput" hidden>
+            <button id="clickOnSelect" onclick="document.getElementById('fileInput').click()"></button>
+        </div>
 
-        <!-- File input -->
-        <input type="file" id="fileInput" />
+        <!-- File name -->
+        <p id="fileName"></p>
 
         <!-- Preset -->
         <label id="presetLabel"></label>
@@ -50,7 +56,7 @@
         </div>
 
         <!-- Result -->
-        <div id="result" style="display:none;">
+        <div id="result">
             <audio id="audioPlayer" controls></audio>
             <a id="downloadBtn" download="cleaned.mp3">⬇️ Download</a>
         </div>
@@ -59,8 +65,6 @@
 
 </div>
 
-<!-- JS  -->
 <script src="js/app.js"></script>
-
 </body>
 </html>

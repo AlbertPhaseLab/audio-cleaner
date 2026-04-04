@@ -1,88 +1,127 @@
 body {
-    font-family: 'Inter', Arial, sans-serif;
-    background: linear-gradient(135deg, #eef2ff, #f8fafc);
     margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    height: 100vh;
 }
 
 .container {
-    max-width: 520px;
-    margin: 80px auto;
-    text-align: center;
-}
-
-.header h1 {
-    font-size: 2rem;
-    margin-bottom: 5px;
-}
-
-.header p {
-    color: #666;
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .card {
     background: white;
-    padding: 35px;
-    border-radius: 16px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
-    transition: transform 0.2s;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    animation: fadeIn 0.6s ease;
 }
 
-.card:hover {
-    transform: translateY(-3px);
+h1 {
+    margin-bottom: 10px;
 }
 
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
+p {
+    color: #555;
+}
+
+.lang-switcher {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+select {
+    padding: 8px;
     border-radius: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
 }
 
-button {
-    width: 100%;
-    margin-top: 20px;
-    padding: 14px;
-    background: linear-gradient(135deg, #6366f1, #4f46e5);
-    color: white;
+/* Drag & Drop */
+#drop-area {
+    border: 2px dashed #667eea;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+#drop-area.hover {
+    background: #f0f4ff;
+    border-color: #5a67d8;
+}
+
+#drop-area button {
+    margin-top: 10px;
+    background: transparent;
     border: none;
-    border-radius: 10px;
+    color: #667eea;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.2s;
 }
 
-button:hover {
-    opacity: 0.9;
-    transform: scale(1.02);
+/* Button */
+#btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: #667eea;
+    color: white;
+    font-weight: bold;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
+#btn:hover {
+    background: #5a67d8;
+}
+
+/* Progress */
 .progress {
     width: 100%;
-    height: 10px;
+    height: 6px;
     background: #eee;
-    margin-top: 20px;
     border-radius: 10px;
-    overflow: hidden;
+    margin-top: 15px;
 }
 
 #progress-bar {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #6366f1, #22c55e);
-    transition: width 0.3s;
+    background: #667eea;
+    border-radius: 10px;
+    transition: 0.3s;
 }
 
-#audioPlayer {
-    margin-top: 15px;
+/* Result */
+#result {
+    margin-top: 20px;
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+audio {
     width: 100%;
+    margin-bottom: 10px;
 }
 
-#downloadBtn {
-    display: inline-block;
-    margin-top: 10px;
-    color: #4f46e5;
-    text-decoration: none;
-    font-weight: bold;
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

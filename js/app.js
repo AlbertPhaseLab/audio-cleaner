@@ -10,6 +10,8 @@ const translations = {
         error: "❌ Error procesando audio",
         preset: "Preset",
         selectFile: "Selecciona un archivo",
+        clickOnSelect: "Seleccionar archivo",
+        dropText: "Arrastra y suelta tu archivo aquí",
         pro: "🚀 Disponible en versión PRO (archivos grandes)",
 
         options: {
@@ -27,7 +29,9 @@ const translations = {
         done: "✅ Audio ready!",
         error: "❌ Error processing audio",
         preset: "Preset",
+        dropText: "Drag & drop your file here",
         selectFile: "Select a file",
+        clickOnSelect: "Select file",
         pro: "🚀 Available in PRO version (large files)",
 
         options: {
@@ -84,10 +88,48 @@ function changeLang() {
     updateUI();
 }
 
-// Inicializar idioma al cargar
+// Initialize UI
 window.onload = () => {
     updateUI();
 };
+
+// ---------------- DRAG & DROP ----------------
+
+const dropArea = document.getElementById("drop-area");
+const fileInput = document.getElementById("fileInput");
+const fileName = document.getElementById("fileName");
+
+// Click → open file dialog
+dropArea.addEventListener("click", () => fileInput.click());
+
+// Drag events
+dropArea.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    dropArea.classList.add("hover");
+});
+
+dropArea.addEventListener("dragleave", () => {
+    dropArea.classList.remove("hover");
+});
+
+dropArea.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropArea.classList.remove("hover");
+
+    const files = e.dataTransfer.files;
+    fileInput.files = files;
+
+    updateFileName();
+});
+
+// Show selected file name
+fileInput.addEventListener("change", updateFileName);
+
+function updateFileName() {
+    if (fileInput.files.length > 0) {
+        fileName.innerText = fileInput.files[0].name;
+    }
+}
 
 // ---------------- MAIN UPLOAD ----------------
 
@@ -108,7 +150,7 @@ async function upload() {
 
     const file = fileInput.files[0];
 
-    // 🚀 LIMITACIÓN FREE (monetización)
+    // 🚀 FREE LIMIT
     if (file.size > 50 * 1024 * 1024) {
         status.innerText = translations[currentLang].pro;
         return;
