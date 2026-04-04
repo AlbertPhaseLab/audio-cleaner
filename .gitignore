@@ -1,0 +1,23 @@
+# Virtual environment
+backend/venv/
+
+# Python cache
+backend/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Output y uploads
+backend/outputs/*
+backend/uploads/*
+
+# Entorno
+.env
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# IDEs (opcional)
+.vscode/
+.idea/
